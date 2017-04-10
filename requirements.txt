@@ -1,0 +1,3 @@
+PyMySQL==0.7.10
+selenium==3.3.3
+Scrapy==1.3.3
