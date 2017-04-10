@@ -4,7 +4,8 @@ You should first install python3.6 and PhantomJS compatible to your system first
 
 ## Install requirements
 `pip install -r requirements.txt`
-<br>For windows users,when installing `Scrapy`,you may need to compile some frameworks(like `twisted`) from source.So you should have Visual Studio installed first.<br>Or you can download a compiled version(.whl file) from
+
+For windows users,when installing `Scrapy`,you may need to compile some frameworks(like `twisted`) from source.So you should have Visual Studio installed first.<br>Or you can download a compiled version(.whl file) from
 [Unofficial Windows Binaries for Python Extension Packages](http://www.lfd.uci.edu/~gohlke/pythonlibs/)<br>
 
 (`Note:`As a windows user,you also should download a `pywin32` whl file from the link above and install it,<br>then execute `python your-python-install-path\Scripts\pywin32_postinstall.py -install`)
