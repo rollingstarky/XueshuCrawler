@@ -3,8 +3,9 @@ Based on python3.6 and `scrapy` framework,crawl information from `Baidu Scholar`
 You should first install python3.6 and PhantomJS compatible to your system first.
 
 ## Install requirements
-`pip install -r requirements.txt`<br>
-For windows users,when installing `Scrapy`,you may need to compile some frameworks(like `twisted`) from source.So you should have Visual Studio installed first.<br>Or you can download a compiled version(.whl file) from
+`pip install -r requirements.txt`
+
+<br>For windows users,when installing `Scrapy`,you may need to compile some frameworks(like `twisted`) from source.So you should have Visual Studio installed first.<br>Or you can download a compiled version(.whl file) from
 [Unofficial Windows Binaries for Python Extension Packages](http://www.lfd.uci.edu/~gohlke/pythonlibs/)<br>
 (`Note:`As a windows user,you also should download a `pywin32` whl file from the link above and install it,<br>then execute `python your-python-install-path\Scripts\pywin32_postinstall.py -install`)
 
@@ -33,6 +34,7 @@ Edit the following variables to fit your environments:<br>
 * `MYSQL_DB`: the database that stores your data
 * `ALL_PAGE`: the number of pages you want to fetch
 * `PHANTOM_PATH`:the path of PhantomJS
+
 <br>To search another keyword,you can change line 19 of `xueshu\xueshu_spider.py`,
 from '非织造' to another keyword.
 
