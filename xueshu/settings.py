@@ -55,12 +55,14 @@ DEFAULT_REQUEST_HEADERS = {
 
 
 #启用自定义的pipeline
+#如果想启用Json文件和Mysql数据库，请移除指定行的注释（60行，61行）
 ITEM_PIPELINES = {
-    'xueshu.pipelines.XueshuPipeline': 300,
-    'xueshu.pipelines.MysqlPipeline':500,
+#    'xueshu.pipelines.XueshuPipeline': 300,
+#    'xueshu.pipelines.MysqlPipeline':500,
+    'xueshu.pipelines.MongoPipeline':800,
 }
 
-ALL_PAGE=3
+ALL_PAGE=1
 PHANTOM_PATH='E:\\software\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe'
 KEY_WORD='非织造'
 #mysql连接参数设置
@@ -68,6 +70,11 @@ MYSQL_HOST='localhost'
 MYSQL_USER='scholar'
 MYSQL_PASS='starky'
 MYSQL_DB='scholar'
+
+#Mongodb连接参数
+MONGO_URI='localhost:27017'
+MONGO_DB='scholar2'
+MONGO_COLLECTION='xueshu'
 # Enable and configure the AutoThrottle extension (disabled by default)
 #AUTOTHROTTLE_ENABLED = True
 # The initial download delay

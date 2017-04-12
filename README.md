@@ -1,6 +1,8 @@
 # XueshuCrawler
-Based on python3.6 and `scrapy` framework,crawl information from `Baidu Scholar`(百度学术),include Database,Json pipelines and dynamic content fetching(use PhantomJS)<br>
+Based on `python3.6` and `scrapy` framework,crawl information from `Baidu Scholar`(百度学术),include Database(`Mysql` and `Mongodb`),`Json` pipelines and dynamic content fetching(use `PhantomJS`)<br>
 You should first install python3.6 and PhantomJS compatible to your system first.
+
+[PhantomJS](http://phantomjs.org/download.html)
 
 ## Install requirements
 `pip install -r requirements.txt`
@@ -33,11 +35,16 @@ Edit the following variables to fit your environments:<br>
 * `MYSQL_USER`: your mysql database's username
 * `MYSQL_PASS`: your mysql database's password
 * `MYSQL_DB`: the database that stores your data
+* `MONGO_URI`:the mongodb's uri(like `'host:port'`)
+* `MONGO_DB`：the mongodb's database name
+* `MONGO_COLLECTION`:the mongodb's collection name
 * `ALL_PAGE`: the number of pages you want to fetch
 * `PHANTOM_PATH`:the path of PhantomJS
 
 <br>To search another keyword,you can change line 19 of `xueshu\xueshu_spider.py`,
 from '非织造' to another keyword.
+
+If you want to enable Json file output and mysql database,please remove comments of the related lines.The default pipeline is Mongodb.
 
 ## Run
 

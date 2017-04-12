@@ -7,6 +7,7 @@
 from scrapy.conf import settings
 import json
 import pymysql
+import pymongo
 
 #写入Json文件
 class XueshuPipeline(object):
@@ -42,5 +43,33 @@ class MysqlPipeline(object):
 	def spider_closed(self,spider):
 		self.cursor.close()
 		self.conn.close()
+
+class MongoPipeline(object):
+	def __init__(self):
+		self.mongo_uri=settings['MONGO_URI']
+		self.mongo_db=settings['MONGO_DB']
+		self.collection=settings['MONGO_COLLECTION']		
+	
+#	@classmethod
+#	def from_crawler(cls,crawler):
+#		return cls(
+#			mongo_uri=crawler.settings.get('MONGO_URI'),
+#
+#			mongo_db=crawler.settings.get('MONGO_DATABASE')
+	
+	def open_spider(self,spider):
+		self.client=pymongo.MongoClient(self.mongo_uri)
+		self.db=self.client[self.mongo_db]
+
+	def close_spider(self,spider):
+		self.client.close()
+
+	def process_item(self,item,spider):
+		for key in item:
+			if key=='title':
+				item[key]=''.join(item[key])
+		self.db[self.collection].insert(dict(item))
+		return item
+		
 	
 
