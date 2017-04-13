@@ -54,10 +54,11 @@ This can fetch lots of information about papers from Baidu Scholar,include title
 The data was stored to a Json file and also your Mysql database.
 It uses PhantomJS headless browser to render JavaScript and get the abstracts of papers.
 
-`cd visualization`
+`cd visualization`<br>
 `python plot.py` 
 
 Use `wordcloud` to render the key words of papers fetched before
+![image](https://raw.githubusercontent.com/rollingstarky/XueshuCrawler/master/visualization/wordcloud.png)
 
 
 
