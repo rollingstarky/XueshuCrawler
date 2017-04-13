@@ -5,7 +5,9 @@ You should first install python3.6 and PhantomJS compatible to your system first
 [PhantomJS](http://phantomjs.org/download.html)
 
 ## Install requirements
-`pip install -r requirements.txt`
+```Bash
+pip install -r requirements.txt
+```
 
 For windows users,when installing `Scrapy`,you may need to compile some frameworks(like `twisted`) from source.So you should have Visual Studio installed first.<br>Or you can download a compiled version(.whl file) from
 [Unofficial Windows Binaries for Python Extension Packages](http://www.lfd.uci.edu/~gohlke/pythonlibs/)<br>
@@ -48,17 +50,21 @@ If you want to enable Json file output and mysql database,please remove comments
 
 ## Run
 
-`scrapy crawl xueshu`<br>
+```Bash
+scrapy crawl xueshu`
+```
 
 This can fetch lots of information about papers from Baidu Scholar,include title,author,publish year,cited number,subjects,abstracts and so on.
 The data was stored to a Json file and also your Mysql database.
 It uses PhantomJS headless browser to render JavaScript and get the abstracts of papers.
 
-`cd visualization`<br>
-`python plot.py` 
-
+```Bash
+cd visualization &&
+python plot.py
+```
 Use `wordcloud` to render the key words of papers fetched before
-![image](https://raw.githubusercontent.com/rollingstarky/XueshuCrawler/master/visualization/wordcloud.png)
+
+<img width="320" height="480" src="https://raw.githubusercontent.com/rollingstarky/XueshuCrawler/master/visualization/wordcloud.png"/>
 
 
 
