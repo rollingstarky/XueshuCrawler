@@ -18,10 +18,10 @@ First,login into you mysql account and execute the following commands to create 
 
         CREATE TABLE xueshu (
         id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        title varchar(60) NOT NULL,
+        title varchar(60) UNIQUE NOT NULL,
         author varchar(60) NOT NULL,
         publish varchar(40) DEFAULT NULL,
-        year varchar(6) DEFAULT NULL,
+        year year(4) DEFAULT NULL,
         cite int(11) DEFAULT NULL,
         subject varchar(120) DEFAULT NULL,
         abstract text

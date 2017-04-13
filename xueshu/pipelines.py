@@ -14,9 +14,14 @@ class XueshuPipeline(object):
 
 	def __init__(self):
 		self.file=open('items.json','w')
+		self.titles=set()
 	def process_item(self, item, spider):
-		line=json.dumps(dict(item),ensure_ascii=False) +"\n"
-		self.file.write(line)
+		
+		item['title']=''.join(item['title'])
+		if item['title'] not in self.titles:
+			line=json.dumps(dict(item),ensure_ascii=False) +"\n"
+			self.file.write(line)
+		self.titles.add(item['title'])
 		return item
 	def spider_closed(self,spider):
 		self.file.close()
@@ -29,16 +34,21 @@ class MysqlPipeline(object):
 		self.cursor=self.conn.cursor()
 		self.cursor.execute("truncate table xueshu;")
 		self.conn.commit()
+		#检测重复数据
+		self.titles=set()
 
 	def process_item(self,item,spider):
-		data=dict(item)
-		for key in data:
+		for key in item.keys():
 			if key=='title':
-				data[key]=''.join(data[key])
+				item[key]=''.join(item[key])
 			else:
-				data[key]=' '.join(data[key])
-		self.cursor.execute("insert into scholar.xueshu (title,author,publish,year,cite,subject,abstract) values (%s,%s,%s,%s,%s,%s,%s)",(data['title'],data['author'],data['publish'],data['year'],data['cite'],data['subject'],data['abstract']))
+				item[key]=' '.join(item[key])
+
+		if item['title'] not in self.titles:
+			self.cursor.execute("insert into scholar.xueshu (title,author,publish,year,cite,subject,abstract) values (%s,%s,%s,%s,%s,%s,%s)",(item['title'],item['author'],item['publish'],item['year'],item['cite'],item['subject'],item['abstract']))
+		self.titles.add(item['title'])
 		self.conn.commit()
+		return item
 
 	def spider_closed(self,spider):
 		self.cursor.close()
@@ -48,7 +58,8 @@ class MongoPipeline(object):
 	def __init__(self):
 		self.mongo_uri=settings['MONGO_URI']
 		self.mongo_db=settings['MONGO_DB']
-		self.collection=settings['MONGO_COLLECTION']		
+		self.collection=settings['MONGO_COLLECTION']
+		self.titles=set()		
 	
 #	@classmethod
 #	def from_crawler(cls,crawler):
@@ -65,10 +76,12 @@ class MongoPipeline(object):
 		self.client.close()
 
 	def process_item(self,item,spider):
-		for key in item:
-			if key=='title':
-				item[key]=''.join(item[key])
-		self.db[self.collection].insert(dict(item))
+		
+		item['title']=''.join(item['title'])
+				
+		if item['title'] not in self.titles: 
+			self.db[self.collection].insert(dict(item))
+		self.titles.add(item['title'])
 		return item
 		
 	
